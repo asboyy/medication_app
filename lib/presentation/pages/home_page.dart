@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:medication_app/screens/home_page.dart' as screen;
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Medication App")),
-      body: Center(child: Text("Daftar Pasien")),
-    );
+    return const screen.HomePage();
   }
 }
