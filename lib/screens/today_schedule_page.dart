@@ -44,7 +44,9 @@ class _TodaySchedulePageState extends State<TodaySchedulePage> {
     }
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('${entry.medication.name} ditandai sudah diminum.')),
+      SnackBar(
+        content: Text('${entry.medication.name} ditandai sudah diminum.'),
+      ),
     );
   }
 
@@ -52,7 +54,9 @@ class _TodaySchedulePageState extends State<TodaySchedulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.patientId == null ? 'Jadwal Hari Ini' : 'Checklist Minum Obat'),
+        title: Text(
+          widget.patientId == null ? 'Jadwal Hari Ini' : 'Checklist Minum Obat',
+        ),
       ),
       body: SafeArea(
         child: _isSyncing
@@ -67,7 +71,9 @@ class _TodaySchedulePageState extends State<TodaySchedulePage> {
 
                   final groups = <String, List<_ScheduleEntry>>{};
                   for (final entry in schedule) {
-                    groups.putIfAbsent(entry.time, () => <_ScheduleEntry>[]).add(entry);
+                    groups
+                        .putIfAbsent(entry.time, () => <_ScheduleEntry>[])
+                        .add(entry);
                   }
                   final times = groups.keys.toList()..sort();
 
@@ -95,7 +101,9 @@ class _TodaySchedulePageState extends State<TodaySchedulePage> {
                                     padding: const EdgeInsets.only(bottom: 12),
                                     child: _ScheduleTile(
                                       entry: entry,
-                                      onTaken: entry.status == MedicationLogStatus.taken
+                                      onTaken:
+                                          entry.status ==
+                                              MedicationLogStatus.taken
                                           ? null
                                           : () => _markTaken(entry),
                                     ),
@@ -115,8 +123,15 @@ class _TodaySchedulePageState extends State<TodaySchedulePage> {
 
   List<_ScheduleEntry> _buildSchedule() {
     final medications = DatabaseService.getAllMedications()
-        .where((medication) => DatabaseService.isMedicationActiveOn(medication, _today))
-        .where((medication) => widget.patientId == null || medication.patientId == widget.patientId)
+        .where(
+          (medication) =>
+              DatabaseService.isMedicationActiveOn(medication, _today),
+        )
+        .where(
+          (medication) =>
+              widget.patientId == null ||
+              medication.patientId == widget.patientId,
+        )
         .toList();
 
     final entries = <_ScheduleEntry>[];
@@ -180,7 +195,9 @@ class _ScheduleTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.45),
+        color: Theme.of(
+          context,
+        ).colorScheme.surfaceContainerHighest.withOpacity(0.45),
         borderRadius: BorderRadius.circular(18),
       ),
       child: Row(
@@ -207,7 +224,9 @@ class _ScheduleTile extends StatelessWidget {
             onPressed: onTaken,
             icon: const Icon(Icons.check),
             label: Text(
-              entry.status == MedicationLogStatus.taken ? 'Sudah' : 'Sudah Minum',
+              entry.status == MedicationLogStatus.taken
+                  ? 'Sudah'
+                  : 'Sudah Minum',
             ),
           ),
         ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medication_app/screens/home_page.dart';
+import 'package:medication_app/presentation/pages/home_page.dart';
 
 import 'services/database_service.dart';
 import 'services/notification_service.dart';
