@@ -1,16 +1,20 @@
-# medication_app
+Medication App
+Aplikasi manajemen obat berbasis mobile yang dirancang untuk membantu pengguna melacak jadwal konsumsi obat, dosis, dan stok obat secara efisien. Proyek ini dibangun dengan fokus pada kemudahan navigasi (UI/UX) dan fungsionalitas yang andal.
 
-A new Flutter project.
+🚀 Fitur Utama
+Manajemen Inventaris Obat: Tambah, edit, dan hapus daftar obat yang sedang dikonsumsi.
 
-## Getting Started
+Pengingat Jadwal: Notifikasi otomatis untuk memastikan tidak ada dosis yang terlewat.
 
-This project is a starting point for a Flutter application.
+Riwayat Konsumsi: Mencatat histori obat yang telah diminum untuk pemantauan kesehatan jangka panjang.
 
-A few resources to get you started if this is your first Flutter project:
+Detail Dosis: Informasi lengkap mengenai dosis, instruksi khusus (misal: sebelum/sesudah makan), dan kegunaan obat.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+🛠️ Teknologi yang Digunakan
+Bahasa Pemrograman: Dart
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Framework: Flutter
+
+Database: SQLite / Room Database (Untuk penyimpanan lokal)
+
+UI Component: Material Design Guidelines
