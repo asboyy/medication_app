@@ -42,9 +42,15 @@ class _HistoryPageState extends State<HistoryPage> {
           builder: (context, _, __) {
             final logs = DatabaseService.getLogsForDate(_selectedDay);
             final groupedLogs = DatabaseService.getLogsGroupedByDate();
-            final takenCount = logs.where((log) => log.status == MedicationLogStatus.taken).length;
-            final missedCount = logs.where((log) => log.status == MedicationLogStatus.missed).length;
-            final pendingCount = logs.where((log) => log.status == MedicationLogStatus.pending).length;
+            final takenCount = logs
+                .where((log) => log.status == MedicationLogStatus.taken)
+                .length;
+            final missedCount = logs
+                .where((log) => log.status == MedicationLogStatus.missed)
+                .length;
+            final pendingCount = logs
+                .where((log) => log.status == MedicationLogStatus.pending)
+                .length;
 
             return ListView(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
@@ -53,12 +59,18 @@ class _HistoryPageState extends State<HistoryPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(12),
                     child: TableCalendar<MedicationLog>(
-                      firstDay: DateTime.now().subtract(const Duration(days: 365)),
-                      lastDay: DateTime.now().add(const Duration(days: 365 * 3)),
+                      firstDay: DateTime.now().subtract(
+                        const Duration(days: 365),
+                      ),
+                      lastDay: DateTime.now().add(
+                        const Duration(days: 365 * 3),
+                      ),
                       focusedDay: _focusedDay,
-                      selectedDayPredicate: (day) => DatabaseService.isSameDate(day, _selectedDay),
+                      selectedDayPredicate: (day) =>
+                          DatabaseService.isSameDate(day, _selectedDay),
                       eventLoader: (day) =>
-                          groupedLogs[DatabaseService.dateOnly(day)] ?? const <MedicationLog>[],
+                          groupedLogs[DatabaseService.dateOnly(day)] ??
+                          const <MedicationLog>[],
                       calendarFormat: CalendarFormat.month,
                       startingDayOfWeek: StartingDayOfWeek.monday,
                       onDaySelected: (selectedDay, focusedDay) async {
@@ -95,15 +107,27 @@ class _HistoryPageState extends State<HistoryPage> {
                           runSpacing: 8,
                           children: [
                             Chip(
-                              avatar: const Icon(Icons.check_circle, color: Colors.green, size: 18),
+                              avatar: const Icon(
+                                Icons.check_circle,
+                                color: Colors.green,
+                                size: 18,
+                              ),
                               label: Text('$takenCount diminum'),
                             ),
                             Chip(
-                              avatar: const Icon(Icons.cancel, color: Colors.red, size: 18),
+                              avatar: const Icon(
+                                Icons.cancel,
+                                color: Colors.red,
+                                size: 18,
+                              ),
                               label: Text('$missedCount terlewat'),
                             ),
                             Chip(
-                              avatar: const Icon(Icons.schedule, color: Colors.orange, size: 18),
+                              avatar: const Icon(
+                                Icons.schedule,
+                                color: Colors.orange,
+                                size: 18,
+                              ),
                               label: Text('$pendingCount menunggu'),
                             ),
                           ],
@@ -130,17 +154,26 @@ class _HistoryPageState extends State<HistoryPage> {
                   )
                 else
                   ...logs.map((log) {
-                    final medication = DatabaseService.getMedicationById(log.medicationId);
+                    final medication = DatabaseService.getMedicationById(
+                      log.medicationId,
+                    );
                     final statusData = _statusData(log.status);
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
                       child: Card(
                         child: ListTile(
                           contentPadding: const EdgeInsets.all(16),
-                          leading: Icon(statusData.icon, color: statusData.color),
-                          title: Text(medication?.name ?? 'Obat tidak ditemukan'),
-                          subtitle: Text('${log.time} • ${statusData.label}'),
-                          trailing: medication == null ? null : Text(_patientLabel(medication)),
+                          leading: Icon(
+                            statusData.icon,
+                            color: statusData.color,
+                          ),
+                          title: Text(
+                            medication?.name ?? 'Obat tidak ditemukan',
+                          ),
+                          subtitle: Text('${log.time} ï¿½ ${statusData.label}'),
+                          trailing: medication == null
+                              ? null
+                              : Text(_patientLabel(medication)),
                         ),
                       ),
                     );
@@ -160,7 +193,11 @@ class _HistoryPageState extends State<HistoryPage> {
   _StatusData _statusData(String status) {
     switch (status) {
       case MedicationLogStatus.taken:
-        return const _StatusData('Sudah diminum', Icons.check_circle, Colors.green);
+        return const _StatusData(
+          'Sudah diminum',
+          Icons.check_circle,
+          Colors.green,
+        );
       case MedicationLogStatus.missed:
         return const _StatusData('Terlewat', Icons.cancel, Colors.red);
       default:

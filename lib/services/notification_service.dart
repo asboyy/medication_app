@@ -9,15 +9,20 @@ import '../data/models/medication.dart';
 class NotificationService {
   NotificationService._();
 
+  static const String _channelId = 'medication_reminder_channel_custom_sound';
+  static const RawResourceAndroidNotificationSound _notificationSound =
+      RawResourceAndroidNotificationSound('reminder_sound');
+
   static final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
 
   static const AndroidNotificationChannel _channel = AndroidNotificationChannel(
-    'medication_reminder_channel',
+    _channelId,
     'Medication Reminder',
     description: 'Reminder jadwal minum obat pasien',
     importance: Importance.high,
     playSound: true,
+    sound: _notificationSound,
   );
 
   static Future<void> init() async {
@@ -143,12 +148,13 @@ class NotificationService {
   static NotificationDetails _details() {
     return const NotificationDetails(
       android: AndroidNotificationDetails(
-        'medication_reminder_channel',
+        _channelId,
         'Medication Reminder',
         channelDescription: 'Reminder jadwal minum obat pasien',
         importance: Importance.high,
         priority: Priority.high,
         playSound: true,
+        sound: _notificationSound,
         enableVibration: true,
         category: AndroidNotificationCategory.reminder,
       ),
